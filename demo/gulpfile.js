@@ -9,7 +9,7 @@ var pngquant    = require('imagemin-pngquant'); // 使用pngquant深度压缩png
 var cache       = require('gulp-cache'); // 只压缩修改的图片,没有修改的图片直接从缓存文件读取（C:UsersAdministratorAppDataLocalTempgulp-cache）
 var runSequence = require('gulp-run-sequence');
 
-var lessSrc 		 = 'src/less/*.less';
+var lessSrc 		= 'src/less/*.less';
 var cssSrc      = 'src/css/*.css';
 var cssDest 	  = 'dist/css';
 var jsSrc 		  = 'src/js/*/*.js';
