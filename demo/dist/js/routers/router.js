@@ -1,0 +1,1 @@
+define("routers/router",function(e,t,o){var r,i,n,l;r=e("backbone"),l=e("common"),n=e("collections/todos"),i=r.Router.extend({routes:{"*filter":"setFilter"},setFilter:function(e){l.TodoFilter=e&&e.trim()||"",n.trigger("filter")}}),o.exports=i});
