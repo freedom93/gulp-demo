@@ -1,1 +1,11 @@
-define("common",function(o,e,n){n.exports={TodoFilter:"",ENTER_KEY:13}});
+define('common', function(require, exports, module){
+
+module.exports = {
+	// Which filter are we using?
+	TodoFilter: '', // empty, active, completed
+
+	// What is the enter key constant?
+	ENTER_KEY: 13
+};
+
+});

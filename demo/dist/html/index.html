@@ -1,2 +1,51 @@
-<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Todo</title><link rel="stylesheet" href="../css/normalize.css"><link rel="stylesheet" href="../css/main.css"><link rel="stylesheet" href="../css/base.css"><script src="../js/mod.js"></script><script src="../js/collections/todos.js"></script><script src="../js/views/app.js"></script><script src="../js/models/todo.js"></script><script src="../js/views/todos.js"></script><script src="../js/routers/router.js"></script><script src="../js/backbone/backbone.js"></script><script src="../js/underscore/underscore.js"></script><script src="../js/jquery/jquery.js"></script><script src="../js/vendor/backbone.localStorage.js"></script><script src="../js/common/common.js"></script><script src="../js/main.js"></script><!--[if lt IE 9]><script src="http://hefangshi.github.io/fis-site/assets/themes/fis/js/html5shiv.js"></script>
-    <script src="http://hefangshi.github.io/fis-site/assets/themes/fis/js/respond.min.js"></script><![endif]--></head><body><script data-fixed="true"></script><section id="todoapp"><header id="header"><h1>todos</h1><input id="new-todo" placeholder="What needs to be done?" autofocus></header><section id="main"><input id="toggle-all" type="checkbox"><label for="toggle-all">Mark all as complete</label><ul id="todo-list"></ul></section><footer id="footer"></footer></section><footer id="info"><p>Double-click to edit a todo</p></footer><script>require("main")</script></body></html>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Todo</title>
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css?v=8aa9931c64a79a6431c28643b75878dd">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=b41a3bed6930fb1ffb82b2226f146b66">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?v=9ae2cb0905c8cfb57de930e74aab493c"/>
+    <script type="text/javascript" src="../js/mod.js?v=50f4487365f48519c5d25bd63a05e684"></script>
+    <script type="text/javascript" src="../js/collections/todos.js?v=9cc447af401acf920c7db03ac33cfdd6"></script>
+    <script type="text/javascript" src="../js/views/app.js?v=a7d6332d0781f882680ebaaff1596630"></script>
+    <script type="text/javascript" src="../js/models/todo.js?v=cca7a24c3de56edecfdeae39c424c8d2"></script>
+    <script type="text/javascript" src="../js/views/todos.js?v=7d464f1f633d18d4822129850d9bd449"></script>
+    <script type="text/javascript" src="../js/routers/router.js?v=005b616d287a1b0188ecdc76dcd5d206"></script>
+    <script type="text/javascript" src="../js/backbone/backbone.js?v=f6d0280a684bb510cc4dde912a6c995b"></script>
+    <script type="text/javascript" src="../js/underscore/underscore.js?v=810b7ad3014cd46377f88e4689784ed3"></script>
+    <script type="text/javascript" src="../js/jquery/jquery.js?v=7248de606fd107c1cfac313e06dc059e"></script>
+    <script type="text/javascript" src="../js/vendor/backbone.localStorage.js?v=6f68d218a858359726ce65471229c65b"></script>
+    <script type="text/javascript" src="../js/common/common.js?v=606f7502dfa9a4185c196c7e2b589979"></script>
+    <script type="text/javascript" src="../js/main.js?v=9288dc36ce570ec7e7ebc93ff48fba72"></script>
+    <!--[if lt IE 9]>
+    <script src="http://hefangshi.github.io/fis-site/assets/themes/fis/js/html5shiv.js"></script>
+    <script src="http://hefangshi.github.io/fis-site/assets/themes/fis/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <script type="text/javascript" data-fixed="true">
+        //this script tag won't be move by simple
+    </script>
+    <img src="../images/icons/icon_03.gif?v=1e86300b7c52986cc66cbce73bbcf660">
+    <section id="todoapp">
+        <header id="header">
+            <h1>todos</h1>
+            <input id="new-todo" placeholder="What needs to be done?" autofocus>
+        </header>
+        <section id="main">
+            <input id="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul id="todo-list"></ul>
+        </section>
+        <footer id="footer"></footer>
+    </section>
+    <footer id="info">
+        <p>Double-click to edit a todo</p>
+    </footer>
+    <script type="text/javascript">
+        require('main');
+    </script>
+</body>
+</html>

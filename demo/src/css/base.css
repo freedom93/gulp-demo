@@ -23,7 +23,7 @@ button {
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
-  background: #eaeaea url('../images/bg.png');
+  background: #eaeaea url(../images/bg.png?v=@@hash);
   color: #4d4d4d;
   width: 550px;
   margin: 0 auto;
@@ -231,22 +231,22 @@ label[for='toggle-all'] {
   -o-transition: color 0.4s;
   transition: color 0.4s;
   /* using csssprites */
-  background: url(../images/icons/icon_01.gif) no-repeat 7px 12px;
+  background: url('../images/icons/icon_01.gif?v=@@hash') no-repeat 7px 12px;
 }
 #todo-list li label.icon_2 {
-  background: url(../images/icons/icon_02.gif) no-repeat 7px 12px;
+  background: url('../images/icons/icon_02.gif?v=@@hash') no-repeat 7px 12px;
 }
 #todo-list li label.icon_3 {
-  background: url(../images/icons/icon_03.gif) no-repeat 7px 12px;
+  background: url('../images/icons/icon_03.gif?v=@@hash') no-repeat 7px 12px;
 }
 #todo-list li label.icon_4 {
-  background: url(../images/icons/icon_04.png) no-repeat 7px 12px;
+  background: url('../images/icons/icon_04.png?v=@@hash') no-repeat 7px 12px;
 }
 #todo-list li label.icon_5 {
-  background: url(../images/icons/icon_05.png) no-repeat 7px 12px;
+  background: url('../images/icons/icon_05.png?v=@@hash') no-repeat 7px 12px;
 }
 #todo-list li label.icon_6 {
-  background: url(../images/icons/icon_06.png) no-repeat 7px 12px;
+  background: url('../images/icons/icon_06.png?v=@@hash') no-repeat 7px 12px;
 }
 #todo-list li.completed label {
   color: #a9a9a9;
