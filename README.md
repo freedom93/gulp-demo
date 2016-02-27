@@ -205,7 +205,8 @@ gulp.task('default',['lessCss', 'elseTask']); //定义默认任务
 
 ===============================================================================
 
-gulp有很多插件可以实现URL添加MD5版本号，推荐使用gulp-rev-append是比较方便的方法，结果如下:
+
+gulp有很多插件可以实现URL添加MD5版本号，使用gulp-rev和gulp-rev-collector是比较方便的方法，结果如下:
 
 "/css/base.css" => "/dist/css/base-1d87bebe.css"    
 "/js/mod.js" => "/dist/mod-61e0be79.js"    
