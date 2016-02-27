@@ -199,3 +199,134 @@ gulp.task('default',['lessCss', 'elseTask']); //定义默认任务
 刚开始学习，对于很多gulp插件的使用还只是依样画葫芦，接下来的每一天都会把常用插件的使用和技巧意义细说，有什么错误之处，还望指出和见谅。
 
 ===============================================================================
+
+
+2016-2-27 gulp自动添加版本号
+
+===============================================================================
+
+gulp哟很多插件可以实现URL添加MD5版本号，推荐使用gulp-rev-append是比较方便的方法，结果如下:
+
+"/css/base.css" => "/dist/css/base-1d87bebe.css"    
+"/js/mod.js" => "/dist/mod-61e0be79.js"    
+"/images/bg.png"  => "/images/bg-35c3af8134.png"
+
+但是由于公司发布系统限制，如果用上面方法实现，每次更新都会积压过多过期无用的文件，估我们希望的预期效果是:
+
+"/css/base.css" => "/dist/css/base.css?v=1d87bebe"    
+"/js/mod.js" => "/dist/mod.js?v=61e0be79"    
+"/images/bg.png"  => "/images/bg.png?v=35c3af8134"
+
+因此我们需要对上面的gulp-rev-append插件进行改造。
+
+1.安装Gulp
+npm install --save-dev gulp
+
+2.安装gulp-rev-append
+npm install --save-dev gulp-rev-append
+
+3.打开node_modules\gulp-rev-append\index.js
+
+  第9行 var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?rev=([^\s>"']+?)['|"]/gi;
+  更新为: var FILE_DECL = /(?:href=|src=|url\()['|"]([^\s>"']+?)\?v=([^\s>"']+?)['|"]/gi;
+
+4.将html和css中包含url,src等资源链接加上?v=@@hash
+
+5.gulp运行
+
+结果达到预期，如下：
+
+Css
+
+background: url('../img/bg.png?v=28bd4f6d18');
+
+Html
+
+href="css/base.css?v=885e0e1815"
+src="js/mod.js?v=10ba7be289"
+src="images/bg.png?v=28bd4f6d18"
+
+6.gulpfile.js:
+
+var gulp        = require('gulp');
+var htmlmin     = require('gulp-htmlmin'); // 压缩html
+var uglify      = require('gulp-uglify'); // 压缩js
+var less        = require('gulp-less'); // less编译成css
+var gulpConcat  = require('gulp-concat'); // 合并文件
+var minifyCss   = require('gulp-minify-css'); // 压缩css
+var imagemin    = require('gulp-imagemin'); // 压缩图片
+var pngquant    = require('imagemin-pngquant'); // 使用pngquant深度压缩png图片的imagemin插件
+var cache       = require('gulp-cache'); // 只压缩修改的图片,没有修改的图片直接从缓存文件读取（C:UsersAdministratorAppDataLocalTempgulp-cache）
+var runSequence = require('gulp-run-sequence'); 
+var rev         = require('gulp-rev-append'); // 给URL自动添加MD5版本号
+var autoprefixer= require('gulp-autoprefixer');
+var del         = require('del');
+
+var htmlSrc     = 'src/html/*.html';
+var htmlDest    = 'dist/html';
+gulp.task('miniHtml', function() {
+    var options = {
+        removeComments: true, //清除HTML注释
+        collapseWhitespace: true, //压缩HTML
+        collapseBooleanAttributes: true, //省略布尔属性的值 <input checked="true"/> ==> <input />
+        removeEmptyAttributes: true, //删除所有空格作属性值 <input id="" /> ==> <input />
+        removeScriptTypeAttributes: true, //删除<script>的type="text/javascript"
+        removeStyleLinkTypeAttributes: true, //删除<style>和<link>的type="text/css"
+        minifyJS: true, //压缩页面JS
+        minifyCSS: true //压缩页面CSS
+    };
+    return gulp.src(htmlSrc)
+        // .pipe(revCollector())
+        // .pipe(htmlmin(options))
+        .pipe(rev())
+        .pipe(gulp.dest(htmlDest));
+});
+
+var cssSrc     = 'src/css/*.css';
+var cssDest    = './dist/css';
+gulp.task('miniCss',function(){
+    return gulp.src(cssSrc)
+        // .pipe(less())
+        .pipe(rev())
+        // .pipe(cssmin())
+        .pipe(gulp.dest(cssDest));
+});
+
+gulp.task('miniJs', function() {
+    return gulp.src(['src/js/*/*.js','src/js/*.js'])
+    // .pipe(gulpif(
+    //   condition, uglify()
+    // ))
+    // .pipe(rev())
+    // .pipe(rev.manifest())
+    .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('miniImages', function() {
+    gulp.src(['src/images/*/*.{png,jpg,gif,ico}','src/images/*.{png,jpg,gif,ico}'])
+        // .pipe(cache(imagemin({
+        //     progressive: true,
+        //     svgoPlugins: [{
+        //         removeViewBox: false
+        //     }],
+        //     use: [pngquant()]
+        // })))
+        .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('build', function(done) {
+  runSequence(
+    ['miniImages'],
+    ['miniCss','miniJs'],
+    ['miniHtml'],
+    done);
+});
+
+gulp.task('default', ['build']);
+
+7.结束语
+
+今天的方法是由看到别人通过改造gulp-rev和gulp-rev-collector来实现将MD5版本号收到启发，自己修改gulp-rev-append插件实现同样的效果。但是有一点点很遗憾，对CSS中background:url()的匹配还存在一点点不足，url()必须带单引号或者双引号才能被正确匹配的到，但是CSS的标准写法中，通常不会带单引号或者双引号。只可惜我对正则表达式理解不够，已经提交问题给大神求解了，希望明天有更好的正则表达式可以做到完美匹配。
+
+
+
