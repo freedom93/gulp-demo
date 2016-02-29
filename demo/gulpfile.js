@@ -2,7 +2,7 @@ var gulp 		    = require('gulp');
 var htmlmin     = require('gulp-htmlmin'); // 压缩html
 var uglify      = require('gulp-uglify'); // 压缩js
 var less        = require('gulp-less'); // less编译成css
-var gulpConcat  = require('gulp-concat'); // 合并文件
+var concat      = require('gulp-concat'); // 合并文件
 var minifyCss   = require('gulp-minify-css'); // 压缩css
 var imagemin    = require('gulp-imagemin'); // 压缩图片
 var pngquant    = require('imagemin-pngquant'); // 使用pngquant深度压缩png图片的imagemin插件
@@ -30,7 +30,6 @@ gulp.task('miniHtml', function() {
         minifyCSS: true //压缩页面CSS
     };
     return gulp.src(htmlSrc)
-        // .pipe(revCollector())
         // .pipe(htmlmin(options))
         .pipe(rev())
         .pipe(gulp.dest(htmlDest));
@@ -48,23 +47,25 @@ gulp.task('miniCss',function(){
 
 gulp.task('miniJs', function() {
     return gulp.src(['src/js/*/*.js','src/js/*.js'])
-    // .pipe(gulpif(
-    //   condition, uglify()
-    // ))
-    // .pipe(rev())
-    // .pipe(rev.manifest())
+    // .pipe(concat('all.js'))//合并后的文件名
+    // .pipe(uglify())
+    .pipe(uglify({
+        mangle: true,//类型：Boolean 默认：true 是否修改变量名
+        compress: true//类型：Boolean 默认：true 是否完全压缩
+        // preserveComments: all //保留所有注释
+    }))
     .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('miniImages', function() {
     gulp.src(['src/images/*/*.{png,jpg,gif,ico}','src/images/*.{png,jpg,gif,ico}'])
-        // .pipe(cache(imagemin({
-        //     progressive: true,
-        //     svgoPlugins: [{
-        //         removeViewBox: false
-        //     }],
-        //     use: [pngquant()]
-        // })))
+        .pipe(cache(imagemin({
+            progressive: true,
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
+            use: [pngquant()]
+        })))
         .pipe(gulp.dest('dist/images'));
 });
 

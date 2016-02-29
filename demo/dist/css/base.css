@@ -23,7 +23,7 @@ button {
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
-  background: #eaeaea url(../images/bg.png?v=@@hash);
+  background: #eaeaea url(../images/bg.png?v=0662854d497beb0930d9d85fec1a0f64);
   color: #4d4d4d;
   width: 550px;
   margin: 0 auto;
@@ -207,7 +207,6 @@ label[for='toggle-all'] {
 #todo-list li .toggle:after {
   content: '✔';
   line-height: 43px;
-  /* 40 + a couple of pixels visual adjustment */
   font-size: 20px;
   color: #d9d9d9;
   text-shadow: 0 -1px 0 #bfbfbf;
@@ -231,7 +230,7 @@ label[for='toggle-all'] {
   -o-transition: color 0.4s;
   transition: color 0.4s;
   /* using csssprites */
-  background: url('../images/icons/icon_01.gif?v=d5d7c5b556ebd01e6ec1cb4e0ceec08e') no-repeat 7px 12px;
+  background: url(../images/icons/icon_01.gif?v=d5d7c5b556ebd01e6ec1cb4e0ceec08e) no-repeat 7px 12px;
 }
 #todo-list li label.icon_2 {
   background: url('../images/icons/icon_02.gif?v=fd9b233fe40ab266c9306cd78f81fa85') no-repeat 7px 12px;
