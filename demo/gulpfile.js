@@ -11,6 +11,8 @@ var runSequence = require('gulp-run-sequence');
 var rev         = require('gulp-rev-append'); // 给URL自动添加MD5版本号
 var autoprefixer= require('gulp-autoprefixer');
 var del         = require('del');
+var livereload  = require('gulp-livereload'); // 自动更新页面
+var webpack     = require('gulp-webpack');
 // cnpm install --save-dev gulp gulp-htmlmin gulp-uglify gulp-less gulp-concat gulp-minify-css gulp-imagemin 
 // cnpm install --save-dev imagemin-pngquant gulp-cache gulp-run-sequence 
 // cnpm install --save-dev gulp-autoprefixer
@@ -30,7 +32,7 @@ gulp.task('miniHtml', function() {
         minifyCSS: true //压缩页面CSS
     };
     return gulp.src(htmlSrc)
-        // .pipe(htmlmin(options))
+        .pipe(htmlmin(options))
         .pipe(rev())
         .pipe(gulp.dest(htmlDest));
 });
@@ -39,6 +41,13 @@ var cssSrc     = 'src/css/*.css';
 var cssDest    = './dist/css';
 gulp.task('miniCss',function(){
     return gulp.src(cssSrc)
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions', 'Android >= 4.0'],
+            cascade: true, //是否美化属性值 默认：true 像这样：
+            //-webkit-transform: rotate(45deg);
+            //        transform: rotate(45deg);
+            remove:true //是否去掉不必要的前缀 默认：true 
+        }))
         // .pipe(less())
         .pipe(rev())
         // .pipe(cssmin())
